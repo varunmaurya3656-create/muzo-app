@@ -1,109 +1,118 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#101216">
-<title>MUZO — Music, beautifully personal.</title>
-<link rel="manifest" href="data:application/manifest+json,{%22name%22:%22MUZO%20Music%22,%22short_name%22:%22MUZO%22,%22start_url%22:%22/%22,%22display%22:%22standalone%22,%22background_color%22:%22#030712%22,%22theme_color%22:%22#0a1128%22,%22icons%22:[{%22src%22:%22https://via.placeholder.com/512%22,%22sizes%22:%22512x512%22,%22type%22:%22image/png%22}]}">
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      const swCode = "self.addEventListener('install', e => e.waitUntil(self.skipWaiting())); self.addEventListener('activate', e => e.waitUntil(self.clients.claim())); self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));";
-      const blob = new Blob([swCode], { type: 'application/javascript' });
-      navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(err => console.log(err));
-    });
-  }
-</script>
-<style>
-:root{--bg:#0e1014;--bg2:#171a20;--glass:rgba(255,255,255,.065);--glass2:rgba(255,255,255,.095);--line:rgba(255,255,255,.14);--text:#f7f7f8;--muted:#a8abb2;--soft:#d9dbe0;--accent:#fff;--danger:#ff6262;--shadow:0 10px 40px rgba(0,0,0,.5);--r:22px}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;background:#080a0e;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif}body{overflow-x:hidden}button,input{font:inherit}button{cursor:pointer;color:inherit}button:active{transform:scale(.965)}
-body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(circle at 10% 10%,#1c2028,#07090d 58%),radial-gradient(circle at 90% 90%,#242830,#050609);background-blend-mode:screen;opacity:.95}body:after{content:"";position:fixed;width:360px;height:360px;border-radius:50%;right:-150px;top:20%;z-index:-2;background:radial-gradient(circle,rgba(255,255,255,.07),transparent 68%);filter:blur(35px);pointer-events:none}
-.glass,.card,.header,.bottomNav,.mini,.modalSheet,.searchBox,.row,.mix,.trend,.loginCard,.profileCard,.setting,.pill,.seg{background:var(--glass);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r)}
-.app{width:min(100%,480px);min-height:100dvh;margin:0 auto;padding:14px 12px calc(112px + env(safe-area-inset-bottom));position:relative}.hidden{display:none!important}.header{height:70px;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;margin:0 0 18px;position:sticky;top:10px;z-index:20}.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#fff,#bfc2c8);color:#15171b;display:grid;place-items:center;font-weight:1000;font-size:20px;box-shadow:inset 0 1px 0 #fff8,0 7px 20px #0005}.avatar{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.09);border:1px solid var(--line);display:grid;place-items:center;font-weight:900;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}.pageTitle{font-size:35px;letter-spacing:-1.4px;font-weight:900;margin:12px 4px 16px}.eyebrow{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.08em;text-transform:uppercase}.section{margin:24px 0}.sectionHead{display:flex;align-items:center;justify-content:space-between;margin:0 3px 12px}.sectionHead h2{margin:0;font-size:18px;letter-spacing:-.4px}.sectionHead span{font-size:11px;color:var(--muted)}
-.hero{padding:20px;min-height:150px;overflow:hidden;position:relative}.hero:before{content:"";position:absolute;width:180px;height:180px;right:-70px;top:-70px;background:radial-gradient(circle,#fff2,transparent 68%);filter:blur(15px)}.hero h1{margin:6px 0 7px;font-size:28px;letter-spacing:-1px}.hero p{margin:0;color:#c5c7cc;font-size:13px;line-height:1.45}.quickGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.mix{padding:13px;min-height:92px;display:flex;align-items:flex-end;position:relative;overflow:hidden}.mix:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#fff1,transparent 55%)}.mix b,.mix span{position:relative;z-index:1}.mix b{display:block;font-size:14px}.mix span{display:block;font-size:10px;color:#c0c2c8;margin-top:3px}.horizontal{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x proximity;padding:2px 1px 9px;scrollbar-width:none}.horizontal::-webkit-scrollbar{display:none}.trend{flex:0 0 158px;scroll-snap-align:start;padding:9px;overflow:hidden}.cover{width:100%;aspect-ratio:1;border-radius:16px;object-fit:cover;background:#25282e;display:block}.trend b{display:block;font-size:13px;margin:9px 2px 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.trend span{display:block;color:var(--muted);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.empty{padding:24px;text-align:center;color:var(--muted);font-size:12px}.likedWrap{display:grid;gap:8px}.row{display:flex;align-items:center;gap:10px;padding:8px;min-height:70px;width:100%;min-width:0;max-width:100%;overflow:hidden;box-sizing:border-box}.row .meta{min-width:0;max-width:100%;overflow:hidden}.row .meta b,.row .meta span{max-width:100%;overflow:hidden;text-overflow:ellipsis}.row[data-key]{cursor:pointer}.row:active{background:rgba(255,255,255,.10)}.row .thumb{width:52px;height:52px;border-radius:14px;object-fit:cover;background:#2b2e34;flex:none}.meta{min-width:0;flex:1}.meta b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta span{display:block;color:var(--muted);font-size:10px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.actions{display:flex;gap:6px;flex:0 0 auto;align-items:center}.iconBtn{width:38px;height:38px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.06);display:grid;place-items:center;flex:none}.playBtn{background:#fff;color:#111;border-color:#fff;font-weight:900}.playBtn:active{transform:scale(.92)}.heart.on{color:#fff;background:rgba(255,255,255,.14)}
-.searchBox{display:flex;align-items:center;padding:6px 7px 6px 15px;margin-bottom:11px}.searchBox input{flex:1;border:0;outline:0;background:transparent;color:#fff;min-width:0;font-size:15px}.searchBox input::placeholder{color:#8e929a}.searchGo{width:44px;height:44px;border:1px solid var(--line);background:rgba(255,255,255,.08);border-radius:15px}.pills{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:13px}.pills::-webkit-scrollbar{display:none}.pill{white-space:nowrap;padding:9px 14px;font-size:11px;color:#c9cbd0;border-radius:999px;background:rgba(255,255,255,.045);box-shadow:none}.pill.active{background:rgba(255,255,255,.16);color:#fff}.results{display:grid;gap:8px}.loading{padding:24px;text-align:center;color:#c8c9ce}.spinner{width:22px;height:22px;border-radius:50%;border:2px solid #ffffff22;border-top-color:#fff;animation:spin .7s linear infinite;margin:0 auto 10px}@keyframes spin{to{transform:rotate(360deg)}}
-.settings{display:grid;gap:12px}.setting{padding:16px}.setting h3{margin:0 0 6px;font-size:15px}.setting p{margin:0;color:var(--muted);font-size:11px;line-height:1.45}.quality{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}.seg{padding:11px 5px;text-align:center;font-size:10px;box-shadow:none;background:rgba(255,255,255,.045)}.seg.active{background:rgba(255,255,255,.16);color:#fff}.presetGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}.preset{padding:10px 5px;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.045);font-size:10px}.preset.active{background:#fff;color:#15171b}.range{width:100%;accent-color:#fff}.account{display:flex;align-items:center;gap:12px}.account .bigAvatar{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;background:#fff;color:#111;font-weight:900;overflow:hidden}.account img{width:100%;height:100%;object-fit:cover}.logout{margin-left:auto;border:1px solid #ffffff18;background:#ffffff08;padding:9px 12px;border-radius:13px;font-size:10px}
-.bottomNav{position:fixed;z-index:40;bottom:max(12px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(calc(100% - 24px),456px);height:72px;padding:7px;display:grid;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.075)}.navBtn{border:0;background:transparent;border-radius:18px;color:#9da0a6;font-size:10px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}.navBtn.active{background:rgba(255,255,255,.13);color:#fff}.navIcon{font-size:18px;line-height:1}.mini{position:fixed;z-index:35;bottom:92px;left:50%;transform:translateX(-50%);width:min(calc(100% - 24px),456px);padding:8px 9px;display:flex;align-items:center;gap:9px;background:rgba(30,32,37,.88);transition:.22s ease;opacity:0;pointer-events:none}.mini.show{opacity:1;pointer-events:auto}.mini img{width:46px;height:46px;border-radius:13px;object-fit:cover}.mini .meta b{font-size:12px}.mini button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;color:#111;font-weight:900}.mini .next{background:#ffffff0a;color:#fff}.progress{position:absolute;left:12px;right:12px;bottom:3px;height:2px;background:#fff1;border-radius:3px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:#fff}
-.playerShade,.modalShade{position:fixed;inset:0;background:rgba(0,0,0,.62);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:80;display:none;align-items:flex-end;justify-content:center}.playerShade.show,.modalShade.show{display:flex}.fullPlayer{width:min(100%,480px);min-height:78dvh;border-radius:32px 32px 0 0;padding:18px;background:rgba(24,26,31,.88);border:1px solid var(--line);box-shadow:0 -20px 60px #0008}.drag{width:42px;height:4px;border-radius:4px;background:#fff3;margin:2px auto 18px}.bigArt{width:min(84vw,360px);aspect-ratio:1;border-radius:26px;object-fit:cover;display:block;margin:12px auto 20px;box-shadow:0 25px 60px #0008}.nowTitle{text-align:center;font-size:22px;font-weight:900}.nowArtist{text-align:center;color:var(--muted);font-size:12px;margin-top:6px}.playerControls{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:25px}.playerControls button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.08)}.playerControls .main{width:64px;height:64px;background:#fff;color:#111;font-size:20px}.modalShade{z-index:100;align-items:center;padding:16px}.modalSheet{width:min(100%,440px);padding:20px;background:rgba(30,32,37,.92)}.modalHead{display:flex;justify-content:space-between;align-items:center}.modalHead h2{margin:0;font-size:20px}.close{border:1px solid var(--line);background:#ffffff0a;border-radius:13px;width:38px;height:38px}.field{margin-top:12px}.field label{display:block;color:#9ea1a8;font-size:9px;font-weight:800;margin-bottom:6px;letter-spacing:.08em}.field input{width:100%;padding:13px 14px;border-radius:15px;border:1px solid var(--line);outline:0;background:rgba(255,255,255,.055);color:#fff}.field input:focus{border-color:#fff5}.primary{width:100%;margin-top:15px;padding:14px;border:0;border-radius:16px;background:#fff;color:#111;font-weight:900}.google{background:rgba(255,255,255,.08);color:#fff;border:1px solid var(--line)}.authSwitch{text-align:center;color:#aaa;font-size:11px;margin-top:13px}.authSwitch button{border:0;background:none;text-decoration:underline}.error{margin-top:10px;padding:10px;border-radius:13px;background:#ff4d4d12;border:1px solid #ff666633;color:#ffb0b0;font-size:10px;line-height:1.4}.authScreen{position:fixed;inset:0;z-index:200;background:radial-gradient(circle at 50% 20%,#30343b,#08090c 65%);display:flex;align-items:center;justify-content:center;padding:20px}.loginCard{width:min(100%,430px);padding:28px;background:rgba(255,255,255,.075)}.loginLogo{width:72px;height:72px;border-radius:24px;background:linear-gradient(145deg,#fff,#c5c8ce);color:#111;display:grid;place-items:center;font-size:30px;font-weight:1000;margin:0 auto 18px;box-shadow:0 18px 35px #0007}.loginCard h1{text-align:center;margin:0;font-size:29px}.loginCard .sub{text-align:center;color:#a8abb1;font-size:12px;margin:7px 0 20px}.splash{position:fixed;inset:0;z-index:300;background:#0a0c10;display:flex;align-items:center;justify-content:center;transition:opacity .35s}.splashInner{text-align:center}.splashLogo{width:76px;height:76px;border-radius:25px;background:#fff;color:#111;display:grid;place-items:center;font-weight:1000;font-size:32px;margin:auto;box-shadow:0 20px 50px #0008}.splashName{font-size:26px;font-weight:1000;margin-top:15px}.splashSub{color:#888d95;font-size:11px;margin-top:5px}.boot{width:26px;height:26px;border-radius:50%;border:2px solid #fff2;border-top-color:#fff;animation:spin .8s linear infinite;margin:20px auto 0}
-@media(min-width:700px){body{background:#07090d}.app{box-shadow:0 0 100px #0007}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#101216">
+  <title>MUZO – Music, beautifully personal.</title>
+
+  <!-- Custom Logo Direct URL Link Integration -->
+  <link rel="icon" type="image/png" href="https://i.ibb.co/hxnwJYr2/logo.png">
+  <link rel="apple-touch-icon" href="https://i.ibb.co/hxnwJYr2/logo.png">
+  
+  <link rel="manifest" href='data:application/manifest+json,{
+    "name": "MUZO Music",
+    "short_name": "MUZO",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#030712",
+    "theme_color": "#0a1128",
+    "icons": [
+      {
+        "src": "https://i.ibb.co/hxnwJYr2/logo.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "https://i.ibb.co/hxnwJYr2/logo.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ]
+  }'>
+
+  <!-- PWA Service Worker Engine -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        const swContent = `
+          self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+          self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+          self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
+        `;
+        const blob = new Blob([swContent], { type: 'application/javascript' });
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(err => console.log('SW Reg Error:', err));
+      });
+    }
+  </script>
+
+  <style>
+    :root{--bg:#0e1014;--bg2:#171a20;--glass:rgba(255,255,255,.065);--glass2:rgba(255,255,255,.095);--line:rgba(255,255,255,.08);--accent:#fff;--text:#f3f4f6;--muted:#9ca3af}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;background:#080a0e;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(circle at 10% 10%,#1c2028,#07090d 50%,#040507);pointer-events:none}
+    .glass,.card,.header,.bottomNav,.mini,.modalSheet,.searchBox,.row,.mix,.trend,.loginCard,.profileCard,.setting,.pill,.subCard{background:var(--glass);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid var(--line);border-radius:20px}
+    .app{width:min(100%,480px);min-height:100dvh;margin:0 auto;padding:14px 12px calc(112px + env(safe-area-inset-bottom));position:relative;box-sizing:border-box}
+    .hero{padding:20px;min-height:150px;overflow:hidden;position:relative}.hero:before{content:"";position:absolute;width:180px;height:180px;background:rgba(255,255,255,.08);filter:blur(50px);top:-40px;right:-30px;border-radius:50%}
+    .searchBox{display:flex;align-items:center;padding:6px 7px 6px 15px;margin-bottom:11px}.searchBox input{border:0;background:0 0;outline:0;color:#fff;width:100%;font-size:15px}
+    .settings{display:grid;gap:12px}.setting{padding:16px}.setting h3{margin:0 0 6px;font-size:15px}.setting p{margin:0;color:var(--muted);font-size:13px}
+    .bottomNav{position:fixed;z-index:40;bottom:max(12px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(calc(100% - 24px),456px);height:66px;display:grid;grid-template-columns:repeat(3,1fr);padding:6px;gap:6px;background:rgba(18,21,27,.82)}
+    .playerShade,.modalShade{position:fixed;inset:0;background:rgba(0,0,0,.62);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:50;display:none}
+    @media(min-width:700px){body{background:#07090d}.app{box-shadow:0 0 100px #0007}}
+  </style>
 </head>
 <body>
-<div id="splash" class="splash"><div class="splashInner"><div class="splashLogo">M</div><div class="splashName">MUZO</div><div class="splashSub">Music, beautifully personal.</div><div class="boot"></div></div></div>
-<div id="authScreen" class="authScreen hidden"><div class="loginCard">
-  <div class="loginLogo">M</div><h1>Welcome to MUZO</h1><div class="sub">Your music. Your world. Beautifully personal.</div>
-  <button id="googleBtn" class="primary google" type="button">Continue with Google</button>
-  <div style="text-align:center;color:#777b83;font-size:10px;margin:15px 0">OR</div>
-  <div class="field"><label>EMAIL</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
-  <div class="field"><label>PASSWORD</label><input id="password" type="password" autocomplete="current-password" placeholder="Minimum 6 characters"></div>
-  <button id="emailBtn" class="primary" type="button">Sign In</button>
-  <div id="authError" class="error hidden"></div>
-  <div class="authSwitch"><span id="authHint">New to MUZO?</span> <button id="authMode" type="button">Create account</button></div>
-  <div style="text-align:center;color:#666a72;font-size:9px;margin-top:16px">Authentication is required to enter MUZO.</div>
-</div></div>
-<div id="app" class="app hidden">
-  <header class="header"><div class="brand"><div class="logo">M</div><span>MUZO</span></div><button id="avatar" class="avatar" aria-label="Profile">U</button></header>
-  <main id="main"></main>
-</div>
-<div id="mini" class="mini"><img id="miniArt" alt=""><div class="meta"><b id="miniTitle">Nothing playing</b><span id="miniArtist">Choose a track</span></div><button id="miniPlay">▶</button><button id="miniOpen" class="next">⌃</button><div class="progress"><i id="progress"></i></div></div>
-<nav id="nav" class="bottomNav hidden"><button class="navBtn active" data-tab="home"><span class="navIcon">⌂</span>Home</button><button class="navBtn" data-tab="search"><span class="navIcon">⌕</span>Search</button><button class="navBtn" data-tab="settings"><span class="navIcon">⚙</span>Settings</button></nav>
-<div id="playerShade" class="playerShade"><div class="fullPlayer"><div class="drag"></div><img id="bigArt" class="bigArt" alt=""><div id="nowTitle" class="nowTitle">Nothing playing</div><div id="nowArtist" class="nowArtist">—</div><div class="playerControls"><button id="prevBtn">‹</button><button id="mainPlay" class="main">▶</button><button id="nextBtn">›</button></div><button id="closePlayer" class="primary" style="background:#ffffff0a;color:#fff;border:1px solid var(--line)">Close Player</button></div></div>
-<div id="modalShade" class="modalShade"><div id="modalSheet" class="modalSheet"></div></div>
-<audio id="audio" preload="metadata" playsinline></audio>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-<script>
-'use strict';
-const $=id=>document.getElementById(id); const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const FB={apiKey:'AIzaSyA9PT441Dl-l27AqE7C3hkfHWyGjEaeb8E',authDomain:'social-media-app-88cf9.firebaseapp.com',databaseURL:'https://social-media-app-88cf9-default-rtdb.firebaseio.com',projectId:'social-media-app-88cf9',storageBucket:'social-media-app-88cf9.firebasestorage.app',messagingSenderId:'343737701028',appId:'1:343737701028:web:0f233b3a901ce91e8d4c31'};
-let auth=null,db=null,user=null,authMode='login';
-let state={tab:'home',quality:localStorage.getItem('muzo_quality')||'320 kbps',preset:localStorage.getItem('muzo_preset')||'Flat',liked:JSON.parse(localStorage.getItem('muzo_liked')||'[]'),history:JSON.parse(localStorage.getItem('muzo_history')||'[]'),search:'',results:[],queue:[],queueIndex:0,current:null};
-const audio=$('audio'); let audioCtx=null,gain=null,bass=null,mid=null,treble=null; let source=null;
-function toast(msg){const t=document.createElement('div');t.textContent=msg;t.style.cssText='position:fixed;z-index:500;left:50%;bottom:160px;transform:translateX(-50%);padding:11px 14px;border:1px solid #ffffff22;background:rgba(25,27,31,.94);backdrop-filter:blur(20px);border-radius:14px;font-size:11px;color:#fff;box-shadow:0 10px 30px #0008';document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
-function initFirebase(){try{if(!window.firebase)return false;if(!firebase.apps.length)firebase.initializeApp(FB);auth=firebase.auth();db=firebase.firestore();auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(()=>{});auth.onAuthStateChanged(async u=>{user=u||null;if(user){hideAuth();await hydrateCloud();showTab(state.tab)}else{showAuth()}});return true}catch(e){console.warn('Firebase init failed',e);return false}}
-function showAuth(){ $('authScreen').classList.remove('hidden');$('app').classList.add('hidden');$('nav').classList.add('hidden');$('mini').classList.remove('show');hideSplash() }
-function hideAuth(){ $('authScreen').classList.add('hidden');$('app').classList.remove('hidden');$('nav').classList.remove('hidden');hideSplash() }
-function hideSplash(){const s=$('splash');if(!s)return;s.style.opacity='0';setTimeout(()=>s.remove(),380)}
-function authErr(e){const m={'auth/invalid-credential':'Email or password is incorrect.','auth/invalid-email':'Enter a valid email address.','auth/email-already-in-use':'An account already exists with this email.','auth/weak-password':'Use at least 6 characters.','auth/operation-not-allowed':'Enable Email/Password or Google in Firebase Console.','auth/unauthorized-domain':'Add this domain under Firebase Authentication → Authorized domains.','auth/popup-blocked':'Google popup was blocked. Try email login or open MUZO from your hosted domain.','auth/popup-closed-by-user':'Google sign-in was cancelled.','auth/network-request-failed':'Network connection failed.'};return m[e?.code]||e?.message||'Sign-in failed. Please try again.'}
-$('authMode').onclick=()=>{authMode=authMode==='login'?'register':'login';$('emailBtn').textContent=authMode==='login'?'Sign In':'Create Account';$('authHint').textContent=authMode==='login'?'New to MUZO?':'Already have an account?';$('authMode').textContent=authMode==='login'?'Create account':'Sign in'};
-$('googleBtn').onclick=async()=>{if(!auth)return toast('Firebase is not available.');try{const p=new firebase.auth.GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});await auth.signInWithPopup(p)}catch(e){$('authError').textContent=authErr(e);$('authError').classList.remove('hidden')}};
-$('emailBtn').onclick=async()=>{const email=$('email').value.trim(),pw=$('password').value;if(!auth)return toast('Firebase is not available.');if(!email||pw.length<6){$('authError').textContent='Enter email and a password of at least 6 characters.';$('authError').classList.remove('hidden');return}try{if(authMode==='login')await auth.signInWithEmailAndPassword(email,pw);else await auth.createUserWithEmailAndPassword(email,pw)}catch(e){$('authError').textContent=authErr(e);$('authError').classList.remove('hidden')}};
-async function hydrateCloud(){if(!user||!db)return;try{const snap=await db.collection('users').doc(user.uid).get();const d=snap.exists?snap.data():{};if(Array.isArray(d.likedIds)){state.liked=d.likedIds;localStorage.setItem('muzo_liked',JSON.stringify(state.liked))}}catch(e){console.warn('Cloud hydration',e)}}
-async function syncLikes(){localStorage.setItem('muzo_liked',JSON.stringify(state.liked));if(!user||!db)return;try{await db.collection('users').doc(user.uid).set({email:user.email||'',name:user.displayName||'',photo:user.photoURL||'',likedIds:state.liked,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}catch(e){console.warn('Like sync failed',e)}}
-function isLiked(t){return state.liked.some(x=>x.id===t.id||x.key===t.key)}
-async function toggleLike(t){const i=state.liked.findIndex(x=>x.id===t.id||x.key===t.key);if(i>=0)state.liked.splice(i,1);else state.liked.unshift({...t,key:t.key||t.id});state.liked=state.liked.slice(0,100);await syncLikes();renderHome();if(state.tab==='search')renderSearchResults(state.results)}
-function saveHistory(t){state.history=[t,...state.history.filter(x=>(x.id||x.key)!==(t.id||t.key))].slice(0,30);localStorage.setItem('muzo_history',JSON.stringify(state.history))}
-function fmt(sec){sec=Number(sec)||0;return Math.floor(sec/60)+':'+String(Math.floor(sec%60)).padStart(2,'0')}
-function coverFor(t){return t.cover||t.artwork||'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=500&q=70'}
-function renderHome(){const name=user?.displayName?.split(' ')[0]||'there';const liked=state.liked;const mixes=[['Hindi Hits','Bollywood • Hindi'],['Punjabi Vibes','Punjabi • Desi'],['Urdu Nights','Urdu • Pakistani'],['Global Pulse','Worldwide • Fresh']];$('main').innerHTML=`<div class="hero glass"><div class="eyebrow">${new Date().getHours()<12?'GOOD MORNING':new Date().getHours()<18?'GOOD AFTERNOON':'GOOD EVENING'}</div><h1>Hey ${esc(name)}.</h1><p>A clean, calm music space built for listening—not loading screens.</p></div><section class="section"><div class="sectionHead"><h2>Made For You</h2><span>Quick mixes</span></div><div class="quickGrid">${mixes.map((m,i)=>`<button class="mix" data-mix="${i}"><div><b>${m[0]}</b><span>${m[1]}</span></div></button>`).join('')}</div></section><section class="section"><div class="sectionHead"><h2>Trending Hits</h2><span>Open catalog</span></div><div id="trending" class="horizontal"><div class="loading" style="min-width:100%"><div class="spinner"></div>Loading music</div></div></section><section class="section"><div class="sectionHead"><h2>Your Liked Tracks</h2><span>${liked.length} saved</span></div><div class="likedWrap">${liked.length?liked.slice(0,8).map(trackRow).join(''):`<div class="card empty">Tap ♡ on any track and it will appear here.</div>`}</div></section><section class="section"><div class="sectionHead"><h2>Recently Played</h2><span>${state.history.length}</span></div><div class="likedWrap">${state.history.length?state.history.slice(0,5).map(trackRow).join(''):`<div class="card empty">Your listening history will appear here.</div>`}</div></section>`;document.querySelectorAll('[data-mix]').forEach(b=>b.onclick=()=>{const q=['Hindi','Punjabi','Urdu Pakistani','global electronic'][+b.dataset.mix];state.search=q;showTab('search');setTimeout(()=>doSearch(q),30)});loadTrending()}
-function trackRow(t){const k=esc(t.key||t.id);return `<div class="row" data-key="${k}" role="button" tabindex="0" aria-label="Play ${esc(t.title)}"><img class="thumb" src="${esc(coverFor(t))}" onerror="this.src='https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=200&q=60'" alt=""><div class="meta"><b>${esc(t.title)}</b><span>${esc(t.artist||'Unknown artist')} • ${fmt(t.duration)} • ${esc(t.source||'Music')}</span></div><div class="actions"><button class="iconBtn heart ${isLiked(t)?'on':''}" data-like="${k}" aria-label="Like">${isLiked(t)?'♥':'♡'}</button><button class="iconBtn playBtn" data-play="${k}" aria-label="Play">▶</button></div></div>`}
-function wireRows(root=document){root.querySelectorAll('.row[data-key]').forEach(row=>{const play=()=>{const t=findTrack(row.dataset.key);if(t)playTrack(t)};row.onclick=e=>{if(e.target.closest('[data-like],[data-play]'))return;play()};row.onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('button')){e.preventDefault();play()}}});root.querySelectorAll('[data-play]').forEach(b=>b.onclick=e=>{e.stopPropagation();const t=findTrack(b.dataset.play);if(t)playTrack(t)});root.querySelectorAll('[data-like]').forEach(b=>b.onclick=e=>{e.stopPropagation();const t=findTrack(b.dataset.like);if(t)toggleLike(t)})}
-function findTrack(key){return [...state.results,...state.liked,...state.history,...state.queue].find(t=>(t.key||t.id)===key)||null}
-async function loadTrending(){const box=$('trending');if(!box)return;try{const data=await fetchJson('https://api.audius.co/v1/tracks/trending?limit=12',4000);const arr=(data.data||[]).map(normalizeAudius);state.queue=arr;box.innerHTML=arr.length?arr.map(t=>`<button class="trend" data-trend="${esc(t.key)}"><img class="cover" src="${esc(coverFor(t))}" alt=""><b>${esc(t.title)}</b><span>${esc(t.artist)}</span></button>`).join(''):`<div class="empty">No trending tracks right now.</div>`;box.querySelectorAll('[data-trend]').forEach(b=>b.onclick=()=>{const t=findTrack(b.dataset.trend);if(t)playTrack(t)})}catch(e){box.innerHTML='<div class="card empty" style="min-width:100%">Trending is temporarily unavailable. Search still works.</div>'}}
-function fetchJson(url,ms){return new Promise((resolve,reject)=>{const c=new AbortController();const timer=setTimeout(()=>{c.abort();reject(new Error('timeout'))},ms);fetch(url,{signal:c.signal,cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(x=>{clearTimeout(timer);resolve(x)}).catch(e=>{clearTimeout(timer);reject(e)})})}
-function normalizeAudius(x){const art=x.artwork?.['480x480']||x.artwork?.['150x150']||x.artwork?.['1000x1000']||'';return {key:'aud:'+x.id,id:x.id,title:x.title||'Untitled',artist:x.user?.name||'Audius artist',cover:art,duration:x.duration||0,source:'Audius',stream:`https://api.audius.co/v1/tracks/${encodeURIComponent(x.id)}/stream`}}
-function normalizeITunes(x){return {key:'itunes:'+x.trackId,id:String(x.trackId),title:x.trackName||'Untitled',artist:x.artistName||'Unknown artist',cover:x.artworkUrl100?.replace('100x100','600x600')||'',duration:(x.trackTimeMillis||0)/1000,source:'Apple Music Preview',stream:x.previewUrl||''}}
-async function searchAudius(q){const d=await fetchJson('https://api.audius.co/v1/tracks/search?query='+encodeURIComponent(q)+'&limit=20&offset=0',4500);return (d.data||[]).map(normalizeAudius)}
-async function searchITunes(q){const d=await fetchJson('https://itunes.apple.com/search?term='+encodeURIComponent(q)+'&media=music&entity=song&limit=20',4500);return (d.results||[]).filter(x=>x.previewUrl).map(normalizeITunes)}
-function renderSearch(){ $('main').innerHTML=`<div class="pageTitle">Search</div><div class="searchBox"><input id="searchInput" value="${esc(state.search)}" placeholder="Search Hindi, Punjabi, global music…"><button id="searchGo" class="searchGo">⌕</button></div><div class="pills">${['Trending','Hindi','Punjabi','Pakistani','Urdu','Lo-Fi','Global'].map((x,i)=>`<button class="pill ${state.search.toLowerCase()===x.toLowerCase()?'active':''}" data-q="${x}">${x}</button>`).join('')}</div><div id="results" class="results"></div>`;const input=$('searchInput');$('searchGo').onclick=()=>doSearch(input.value.trim());input.onkeydown=e=>{if(e.key==='Enter')doSearch(input.value.trim())};document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{input.value=b.dataset.q;doSearch(b.dataset.q)});if(state.results.length)renderSearchResults(state.results);else if(state.search)doSearch(state.search);else $('results').innerHTML='<div class="card empty">Search for a song, artist, language, or genre.</div>'}
-async function doSearch(q){q=q.trim();if(!q)return;$('searchInput').value=q;state.search=q;const box=$('results');box.innerHTML='<div class="loading"><div class="spinner"></div>Finding playable music…</div>';let a=[],b=[];const p1=searchAudius(q).catch(()=>[]),p2=searchITunes(q).catch(()=>[]);[a,b]=await Promise.all([p1,p2]);const seen=new Set();state.results=[...a,...b].filter(t=>{if(!t.stream||seen.has(t.title.toLowerCase()+'|'+t.artist.toLowerCase()))return false;seen.add(t.title.toLowerCase()+'|'+t.artist.toLowerCase());return true}).slice(0,30);renderSearchResults(state.results)}
-function renderSearchResults(arr){const box=$('results');if(!box)return;box.innerHTML=arr.length?arr.map(trackRow).join(''):'<div class="card empty">No playable results found. Try another spelling or genre.</div>';wireRows(box)}
-async function resolveAudiusStream(t){const urls=[`https://api.audius.co/v1/tracks/${encodeURIComponent(t.id)}/stream`,`https://discoveryprovider.audius.co/v1/tracks/${encodeURIComponent(t.id)}/stream`];for(const u of urls){try{const r=await fetch(u,{method:'GET',redirect:'follow'});if(r.ok)return r.url}catch(e){}}return null}
-async function playTrack(t){if(!t)return;state.current=t;state.queue=state.results.length?state.results:[...state.queue];state.queueIndex=Math.max(0,state.queue.findIndex(x=>(x.key||x.id)===(t.key||t.id)));updatePlayer();saveHistory(t);audio.pause();audio.removeAttribute('src');audio.load();$('miniPlay').textContent='…';$('mainPlay').textContent='…';$('mini').classList.add('show');let candidates=[];if(t.stream)candidates.push(async()=>t.stream);if(t.source==='Audius')candidates.push(()=>resolveAudiusStream(t));let ok=false;for(const get of candidates){try{const url=await Promise.race([get(),new Promise((_,rej)=>setTimeout(()=>rej(new Error('source timeout')),4500))]);if(!url)continue;audio.src=url;audio.load();await audio.play();ok=true;break}catch(e){console.warn('play source failed',e)}}if(!ok){$('miniPlay').textContent='▶';$('mainPlay').textContent='▶';toast('Is source ko browser play nahi kar pa raha. Dusra result try karo.');return}$('miniPlay').textContent='❚❚';$('mainPlay').textContent='❚❚';}
-function updatePlayer(){const t=state.current;if(!t)return;$('miniArt').src=coverFor(t);$('miniTitle').textContent=t.title;$('miniArtist').textContent=t.artist;$('bigArt').src=coverFor(t);$('nowTitle').textContent=t.title;$('nowArtist').textContent=t.artist}
-function nextTrack(dir=1){if(!state.queue.length)return;state.queueIndex=(state.queueIndex+dir+state.queue.length)%state.queue.length;playTrack(state.queue[state.queueIndex])}
-$('miniPlay').onclick=async()=>{if(audio.paused){try{await audio.play();$('miniPlay').textContent='❚❚';$('mainPlay').textContent='❚❚'}catch(e){toast('Tap Play again after choosing a track.')}}else audio.pause()};$('mainPlay').onclick=()=>$('miniPlay').click();$('prevBtn').onclick=()=>nextTrack(-1);$('nextBtn').onclick=()=>nextTrack(1);$('miniOpen').onclick=()=>{$('playerShade').classList.add('show');updatePlayer()};$('closePlayer').onclick=()=>$('playerShade').classList.remove('show');audio.onplay=()=>{$('miniPlay').textContent='❚❚';$('mainPlay').textContent='❚❚'};audio.onpause=()=>{$('miniPlay').textContent='▶';$('mainPlay').textContent='▶'};audio.onwaiting=()=>{};audio.ontimeupdate=()=>{const p=audio.duration?audio.currentTime/audio.duration*100:0;$('progress').style.width=p+'%'};audio.onended=()=>nextTrack(1);audio.onerror=()=>{if(state.current){$('miniPlay').textContent='▶';$('mainPlay').textContent='▶';toast('Audio source ended or was blocked by the browser.')}};
-function setupAudio(){if(audioCtx)return;try{audioCtx=new (window.AudioContext||window.webkitAudioContext)();source=audioCtx.createMediaElementSource(audio);gain=audioCtx.createGain();bass=audioCtx.createBiquadFilter();mid=audioCtx.createBiquadFilter();treble=audioCtx.createBiquadFilter();bass.type='lowshelf';bass.frequency.value=120;mid.type='peaking';mid.frequency.value=1000;mid.Q.value=.7;treble.type='highshelf';treble.frequency.value=5000;source.connect(bass).connect(mid).connect(treble).connect(gain).connect(audioCtx.destination);applyPreset(state.preset)}catch(e){console.warn('Web Audio unavailable',e)}}
-function applyPreset(p){state.preset=p;localStorage.setItem('muzo_preset',p);if(!bass||!mid||!treble)return;const m={Flat:[0,0,0],['Bass Boost']:[7,1,1],['Vocal Booster']:[-2,5,3],Treble:[1,1,7],Rock:[5,2,5],Pop:[3,3,4]};const v=m[p]||m.Flat;bass.gain.value=v[0];mid.gain.value=v[1];treble.gain.value=v[2];renderSettings()}
-function renderSettings(){$('main').innerHTML=`<div class="pageTitle">Settings</div><div class="settings"><div class="setting glass account"><div class="bigAvatar">${user?.photoURL?`<img src="${esc(user.photoURL)}" alt="">`:'U'}</div><div class="meta"><b>${esc(user?.displayName||'MUZO User')}</b><span>${esc(user?.email||'Signed in')}</span></div><button class="logout" id="logout">Log out</button></div><div class="setting glass"><h3>Audio Quality</h3><p>Playback preference. MUZO uses the best quality the selected catalog source provides; it cannot upgrade a low-quality source into HD.</p><div class="quality">${['128 kbps','320 kbps','Lossless HD'].map(q=>`<button class="seg ${state.quality===q?'active':''}" data-quality="${q}">${q}</button>`).join('')}</div></div><div class="setting glass"><h3>Equalizer</h3><p>Real-time Web Audio gain controls are applied after playback starts.</p><div class="presetGrid">${['Flat','Bass Boost','Vocal Booster','Treble','Rock','Pop'].map(p=>`<button class="preset ${state.preset===p?'active':''}" data-preset="${p}">${p}</button>`).join('')}</div></div><div class="setting glass"><h3>Performance</h3><p>MUZO starts audio processing only after a user taps Play, preventing startup crashes and unnecessary battery/network use.</p></div></div>`;document.querySelectorAll('[data-quality]').forEach(b=>b.onclick=()=>{state.quality=b.dataset.quality;localStorage.setItem('muzo_quality',state.quality);audio.preload=state.quality==='Lossless HD'?'auto':'metadata';toast(state.quality+' preference saved');renderSettings()});document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{setupAudio();if(audioCtx?.state==='suspended')audioCtx.resume().catch(()=>{});applyPreset(b.dataset.preset)});$('logout').onclick=async()=>{try{await auth.signOut()}catch(e){toast('Could not log out')}}}
-function showTab(tab){state.tab=tab;document.querySelectorAll('.navBtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));if(tab==='home')renderHome();if(tab==='search')renderSearch();if(tab==='settings')renderSettings()}
-document.querySelectorAll('.navBtn').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));$('avatar').onclick=()=>showTab('settings');
-window.addEventListener('error',e=>{console.error('MUZO runtime error',e);if($('splash')&&!$('splash').classList.contains('hidden'))hideSplash()});
-window.addEventListener('unhandledrejection',e=>console.warn('MUZO promise',e.reason));
-// Boot: Firebase decides whether to show the login wall or the app. No Home/API work runs before auth resolves.
-(async()=>{try{const ready=initFirebase();if(!ready)showAuth()}catch(e){console.error(e);showAuth()}})();
-</script>
+  <div class="app">
+    <header class="header" style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="https://i.ibb.co/hxnwJYr2/logo.png" alt="MUZO" style="width:36px;height:36px;border-radius:10px;object-fit:cover;">
+        <span style="font-weight:bold;font-size:18px;letter-spacing:1px;">MUZO</span>
+      </div>
+      <button onclick="installPWA()" id="pwaInstallBtn" style="background:#fff;color:#000;border:0;padding:8px 14px;border-radius:12px;font-weight:bold;font-size:12px;cursor:pointer;display:none;">INSTALL APP</button>
+    </header>
+
+    <main id="mainContent">
+      <div class="hero glass" style="margin-bottom:16px;">
+        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Good Evening</div>
+        <h1 style="margin:4px 0 8px;font-size:24px;">Hey Varun.</h1>
+        <p style="margin:0;color:var(--muted);font-size:13px;">A clean, calm music space built for listening.</p>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <h3 style="font-size:16px;margin-bottom:12px;">Made For You</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="card" style="padding:14px;">
+            <strong style="display:block;font-size:14px;">Hindi Hits</strong>
+            <span style="font-size:11px;color:var(--muted);">Bollywood • Hindi</span>
+          </div>
+          <div class="card" style="padding:14px;">
+            <strong style="display:block;font-size:14px;">Punjabi Vibes</strong>
+            <span style="font-size:11px;color:var(--muted);">Punjabi • Desi</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const btn = document.getElementById('pwaInstallBtn');
+      if (btn) btn.style.display = 'block';
+    });
+
+    function installPWA() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+          deferredPrompt = null;
+          document.getElementById('pwaInstallBtn').style.display = 'none';
+        });
+      }
+    }
+  </script>
 </body>
 </html>
