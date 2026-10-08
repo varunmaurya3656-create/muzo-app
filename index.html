@@ -33,7 +33,6 @@
     ]
   }'>
 
-  <!-- PWA Service Worker Engine -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -43,14 +42,15 @@
           self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
         `;
         const blob = new Blob([swContent], { type: 'application/javascript' });
-        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(err => console.log('SW Reg Error:', err));
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(err => console.log(err));
       });
     }
   </script>
 
   <style>
     :root{--bg:#0e1014;--bg2:#171a20;--glass:rgba(255,255,255,.065);--glass2:rgba(255,255,255,.095);--line:rgba(255,255,255,.08);--accent:#fff;--text:#f3f4f6;--muted:#9ca3af}
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;background:#080a0e;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;overflow-x:hidden}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;min-height:100%;background:#080a0e;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;overflow-x:hidden}
     body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(circle at 10% 10%,#1c2028,#07090d 50%,#040507);pointer-events:none}
     .glass,.card,.header,.bottomNav,.mini,.modalSheet,.searchBox,.row,.mix,.trend,.loginCard,.profileCard,.setting,.pill,.subCard{background:var(--glass);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid var(--line);border-radius:20px}
     .app{width:min(100%,480px);min-height:100dvh;margin:0 auto;padding:14px 12px calc(112px + env(safe-area-inset-bottom));position:relative;box-sizing:border-box}
@@ -60,10 +60,37 @@
     .bottomNav{position:fixed;z-index:40;bottom:max(12px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(calc(100% - 24px),456px);height:66px;display:grid;grid-template-columns:repeat(3,1fr);padding:6px;gap:6px;background:rgba(18,21,27,.82)}
     .playerShade,.modalShade{position:fixed;inset:0;background:rgba(0,0,0,.62);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:50;display:none}
     @media(min-width:700px){body{background:#07090d}.app{box-shadow:0 0 100px #0007}}
+    .hidden{display:none!important}
+    .primary{background:#fff;color:#000;border:0;padding:12px;border-radius:12px;font-weight:bold;width:100%;cursor:pointer}
+    .navBtn{background:transparent;border:0;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;cursor:pointer}
+    .navBtn.active{color:#fff}
+    .mini{position:fixed;bottom:86px;left:50%;transform:translateX(-50%);width:min(calc(100% - 24px),456px);padding:8px 12px;display:flex;align-items:center;gap:10px;z-index:39}
+    .mini img{width:40px;height:40px;border-radius:10px;object-fit:cover}
   </style>
 </head>
 <body>
-  <div class="app">
+  <div id="splash" class="splash" style="position:fixed;inset:0;background:#080a0e;z-index:100;display:grid;place-items:center;">
+    <div style="text-align:center;">
+      <img src="https://i.ibb.co/hxnwJYr2/logo.png" style="width:64px;height:64px;border-radius:16px;margin-bottom:12px;">
+      <h2 style="margin:0;">MUZO</h2>
+    </div>
+  </div>
+
+  <div id="authScreen" class="authScreen hidden" style="position:fixed;inset:0;background:#080a0e;z-index:90;padding:20px;display:grid;place-items:center;">
+    <div class="loginCard" style="width:100%;max-width:360px;padding:24px;text-align:center;">
+      <img src="https://i.ibb.co/hxnwJYr2/logo.png" style="width:48px;height:48px;border-radius:12px;margin-bottom:12px;">
+      <h1 style="margin:0 0 4px;font-size:20px;">Welcome to MUZO</h1>
+      <p style="color:var(--muted);font-size:12px;margin-bottom:20px;">Your music. Your world. Beautifully personal.</p>
+      <button id="googleBtn" class="primary google" type="button">Continue with Google</button>
+      <div style="margin:15px 0;font-size:10px;color:var(--muted);">OR</div>
+      <input id="email" type="email" placeholder="you@example.com" style="width:100%;padding:12px;margin-bottom:10px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;">
+      <input id="password" type="password" placeholder="Password" style="width:100%;padding:12px;margin-bottom:12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;">
+      <button id="emailBtn" class="primary" type="button">Sign In</button>
+      <div id="authError" class="error hidden" style="color:#ef4444;font-size:12px;margin-top:10px;"></div>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
     <header class="header" style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:16px;">
       <div style="display:flex;align-items:center;gap:10px;">
         <img src="https://i.ibb.co/hxnwJYr2/logo.png" alt="MUZO" style="width:36px;height:36px;border-radius:10px;object-fit:cover;">
@@ -72,11 +99,15 @@
       <button onclick="installPWA()" id="pwaInstallBtn" style="background:#fff;color:#000;border:0;padding:8px 14px;border-radius:12px;font-weight:bold;font-size:12px;cursor:pointer;display:none;">INSTALL APP</button>
     </header>
 
-    <main id="mainContent">
+    <main id="main">
       <div class="hero glass" style="margin-bottom:16px;">
         <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Good Evening</div>
         <h1 style="margin:4px 0 8px;font-size:24px;">Hey Varun.</h1>
         <p style="margin:0;color:var(--muted);font-size:13px;">A clean, calm music space built for listening.</p>
+      </div>
+
+      <div class="searchBox">
+        <input type="text" id="searchInput" placeholder="Search songs, artists...">
       </div>
 
       <div style="margin-bottom:20px;">
@@ -93,9 +124,31 @@
         </div>
       </div>
     </main>
+
+    <div id="mini" class="mini glass">
+      <img id="miniArt" src="https://i.ibb.co/hxnwJYr2/logo.png" alt="">
+      <div style="flex:1;overflow:hidden;">
+        <b id="miniTitle" style="display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Nothing playing</b>
+        <span id="miniArtist" style="font-size:11px;color:var(--muted);">Select a track</span>
+      </div>
+      <button id="playBtn" style="background:#fff;color:#000;border:0;width:32px;height:32px;border-radius:50%;font-weight:bold;">▶</button>
+    </div>
+
+    <nav id="nav" class="bottomNav">
+      <button class="navBtn active" data-tab="home"><span>🏠</span><span>Home</span></button>
+      <button class="navBtn" data-tab="search"><span>🔍</span><span>Search</span></button>
+      <button class="navBtn" data-tab="settings"><span>⚙️</span><span>Settings</span></button>
+    </nav>
   </div>
 
+  <audio id="audio" preload="metadata" playsinline></audio>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
   <script>
+    // PWA Install Button Handler
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
@@ -113,6 +166,17 @@
         });
       }
     }
+
+    // App Hide Splash Screen on Load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const splash = document.getElementById('splash');
+        if (splash) splash.style.display = 'none';
+        const app = document.getElementById('app');
+        if (app) app.classList.remove('hidden');
+      }, 1000);
+    });
   </script>
 </body>
 </html>
+
